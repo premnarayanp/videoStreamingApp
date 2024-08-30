@@ -41,3 +41,18 @@ export const createJWTSession = async (body) => {
     }
 
 }
+
+//Get all user from DB
+export const getAllFriends = async (userId) => {
+    try {
+        const friends = await User.find({ _id: { $ne: userId } }).select([
+            "email",
+            "name",
+            "_id",
+        ]);
+        return friends;
+    } catch (error) {
+        return new Error(error);
+    }
+}
+

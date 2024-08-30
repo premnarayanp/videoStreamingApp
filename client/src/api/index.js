@@ -62,11 +62,20 @@ export const signUp = async (name, email, password, confirmPassword) => {
   });
 };
 
-// export const allUser = async (id) => {
-//   return customFetch(API_URLS.allUser(id), {
-//     method: 'GET',
-//   });
-// };
+export const getAllFriends = async (id) => {
+  return customFetch(API_URLS.allFriends(id), {
+    method: 'GET',
+  });
+};
+
+
+export const getFriendStatus = async (id) => {
+  return customFetch(API_URLS.getFriendStatus(id), {
+    method: 'GET',
+  });
+};
+
+
 
 // export const getAllMessage = async (from,to) => {
 //   return customFetch(API_URLS.getAllMessage(), {

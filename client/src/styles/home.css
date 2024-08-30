@@ -4,4 +4,7 @@
     overflow: hidden;
     height: 92%;
     width: 100%;
+    padding: 20px 3%;
+    box-sizing: border-box;
+    background-color: aliceblue;
 }

@@ -91,7 +91,7 @@ const Signup = (props) => {
       </div>
       <div className={styles.field}>
         <input
-          placeholder="Confirm password"
+          placeholder="Password"
           type="password"
           required
           value={password}
@@ -100,7 +100,7 @@ const Signup = (props) => {
       </div>
       <div className={styles.field}>
         <input
-          placeholder="Password"
+          placeholder="Confirm Password"
           type="password"
           required
           value={confirmPassword}

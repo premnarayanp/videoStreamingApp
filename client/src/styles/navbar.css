@@ -6,6 +6,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    align-content: center;
     position: relative;
 }
 
@@ -26,7 +27,9 @@
     color: white;
     outline: none;
     border-radius: 10px;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 700;
     cursor: pointer;
+    outline: none;
+    border: solid 1px gray;
 }
