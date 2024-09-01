@@ -1,19 +1,33 @@
-import { useEffect } from 'react';
 import '../styles/home.css';
-import { useSelector, useDispatch } from 'react-redux';
-import { getAllFriends, getFriendStatus } from '../api/index';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { FriendBox } from "../components/index";
+
+import { getAllFriends } from '../api/index';
 import { addFriendList } from '../redux/action/friendsActions';
-import { Friend } from "../components/index";
+import { addStreamSocket } from '../redux/action/socketAction';
+
+import { io } from 'socket.io-client';
+import { API_ROOT as host } from '../utils/index';
+
 
 
 export default function Home(props) {
-
+  const user = props.user;
   const dispatch = useDispatch();
-  const friends = useSelector((state) => state.friendReducer);
-  const auth = useSelector((state) => state.authReducer);
 
-  const friendsList = friends.friendsList;
-  const user = auth.user;
+  useEffect(() => {
+    //add user & socket
+    async function fetchData() {
+      if (user) {
+        const streamSocket = io(host);
+        streamSocket.emit("add-user", user);
+        dispatch(addStreamSocket(streamSocket))
+      }
+    }
+    fetchData();
+  });
+
   useEffect(() => {
     async function fetchData() {
       const response = await getAllFriends(user._id);
@@ -22,28 +36,11 @@ export default function Home(props) {
       }
     }
     fetchData();
-
-  }, []);
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const response = await getFriendStatus();
-  //     if (response.success) {
-  //       dispatch(addFriendList(response.data.allFriends));
-  //     }
-  //   }
-  //   fetchData();
-
-  // }, []);
+  },);
 
   return (
     <div className="Home">
-      {friendsList.map((friend, index) => (
-        <Friend
-          friend={friend}
-          key={`friend-${index}`}
-        />
-      ))}
+      <FriendBox />
     </div>
   )
 }

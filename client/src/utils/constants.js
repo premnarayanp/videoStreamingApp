@@ -1,4 +1,4 @@
-export const API_ROOT = 'http://localhost:8363';
+export const API_ROOT = 'http://localhost:5000';
 
 export const API_URLS = {
   //API URL for User

@@ -36,6 +36,10 @@
     padding: 5px 20px;
 }
 
+.incomingCall {
+    display: none;
+}
+
 .status {
     color: red;
     font-weight: bold;

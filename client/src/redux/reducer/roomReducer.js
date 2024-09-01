@@ -1,26 +1,19 @@
-import { ADD_FRIENDS_LIST, ADD_CURRENT_FRIEND, ADD_STREAM_SOCKET, ADD_FRIEND_STATUS } from "../action/actionType"
+import { ADD_FRIENDS_LIST, ADD_CURRENT_FRIEND, ADD_FRIEND_STATUS } from "../action/actionType"
 
 
-const initialFriendsState = {
+const initialRoomState = {
     friendsList: [],
     currentFriend: {},
-    streamSocket: null,
     friendStatus: "Offline"
 }
 
-export default function friends(state = initialFriendsState, action) {
+export default function rooms(state = initialRoomState, action) {
 
     switch (action.type) {
         case ADD_FRIENDS_LIST:
             return {
                 ...state,
                 friendsList: action.data
-            }
-
-        case ADD_STREAM_SOCKET:
-            return {
-                ...state,
-                streamSocket: action.data
             }
 
 

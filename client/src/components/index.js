@@ -1,5 +1,5 @@
-import App from './App';
 import Navbar from './Navbar';
 import Friend from './Friend';
+import FriendBox from './FriendsBox';
 
-export { App, Navbar, Friend };
+export { Navbar, Friend, FriendBox };

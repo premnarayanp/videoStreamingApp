@@ -5,7 +5,7 @@ import { HashRouter } from 'react-router-dom';
 import { ToastProvider } from 'react-toast-notifications';
 import { Provider } from 'react-redux';
 import store from './redux/store/configureStore';
-import { App } from './components';
+import App from './App';
 import './styles/index.css';
 import { setUserFromToken } from './redux/action/authActions';
 import 'bootstrap/dist/css/bootstrap.min.css';
