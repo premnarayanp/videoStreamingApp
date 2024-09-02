@@ -1,14 +1,19 @@
 import React, { useState, useEffect, useCallback } from 'react';
-// import Peer from 'simple-peer';
 import { useSelector } from 'react-redux';
-import ReactPlayer from "react-player"
 import peer from "../services/peer";
+import '../styles/roomPage.css';
+import { MediaPlayer } from "../components/index";
+
+// import Peer from 'simple-peer';
+//import ReactPlayer from "react-player"
 
 const RoomsPage = () => {
   const [remoteSocketId, setRemoteSocketId] = useState(null);
   const [myStream, setMyStream] = useState();
   const [remoteStream, setRemoteStream] = useState();
   const [showLeaveBtn, setShowLeaveBtn] = useState(false);
+  const [showCallBtn, setShowCallBtn] = useState(true);
+  const [showStreamBtn, setShowStreamBtn] = useState(true);
 
   // const dispatch = useDispatch();
   //const rooms = useSelector((state) => state.roomReducer);
@@ -32,8 +37,13 @@ const RoomsPage = () => {
     const offer = await peer.getOffer();
     //console.log("offer=====", offer);
     socket.emit("room-user:call", { to: remoteSocketId, offer: offer });
+
     setMyStream(stream);
+
     setShowLeaveBtn(true);
+    setShowCallBtn(false);
+    setShowStreamBtn(false);
+
   }, [remoteSocketId, socket]);
 
 
@@ -47,7 +57,7 @@ const RoomsPage = () => {
     });
 
     setMyStream(stream);
-    setShowLeaveBtn(true);
+    setShowCallBtn(false);
 
     const ans = await peer.getAnswer(offer);
     console.log("ans=====", ans);
@@ -59,6 +69,10 @@ const RoomsPage = () => {
     for (const track of myStream.getTracks()) {
       peer.peer.addTrack(track, myStream);
     }
+
+    setShowLeaveBtn(true);
+    setShowCallBtn(false);
+    setShowStreamBtn(false);
   }, [myStream])
 
   const handleCallExcepted = useCallback(async (data) => {
@@ -129,38 +143,17 @@ const RoomsPage = () => {
 
   return (
     <div className='RoomPage'>
-      <h1>Room Page</h1>
+      <h1 className='page-heading'>Room Page</h1>
       <h4>{remoteSocketId ? "User Joined" : "Nothing anyone in Room"}</h4>
-      {
-        remoteSocketId && <button className='callBtn' onClick={handleCallUser}>Call</button>
-      }
 
-      {
-        myStream && <button className='callBtn' onClick={sendStreams}>Send Stream</button>
-      }
-      <>
-        {
-          myStream &&
-          <ReactPlayer
-            playing
-            muted
-            height="200px"
-            width="200px"
-            url={myStream} />
-        }
-      </>
+      {remoteSocketId && showCallBtn && <button className='callBtn' onClick={handleCallUser}>Call</button>}
+      {myStream && showStreamBtn && <button className='callBtn' onClick={sendStreams}>Send Stream</button>}
+      {showLeaveBtn && <button className='callBtn' >Leave Call</button>}
 
-      <>
-        {
-          remoteStream &&
-          <ReactPlayer
-            playing
-            muted
-            height="200px"
-            width="200px"
-            url={remoteStream} />
-        }
-      </>
+      <div className='mediaContainer'>
+        {myStream && <MediaPlayer stream={myStream} userType="You" height="300px" width="300px" />}
+        {remoteStream && <MediaPlayer stream={remoteStream} userType="Remote User" height="300px" width="300px" />}
+      </div>
     </div>
   )
 

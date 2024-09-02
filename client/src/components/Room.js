@@ -15,8 +15,7 @@ const Room = (props) => {
 
     //Except incoming call
     const handleJoinRoom = async () => {
-        // socket.emit("call:accepted", { to: friend, from: auth.user });
-        navigate("/room");
+        socket.emit("room:join", { room: { roomId: room.roomId }, email: room.email });
     }
 
     return (
@@ -30,7 +29,7 @@ const Room = (props) => {
             </div>
 
             <div>
-                <button className='callBtn' onClick={() => handleJoinRoom()}> Join Room</button>
+                <button className='callBtn' onClick={handleJoinRoom}> Join Room</button>
             </div>
         </div>
     )

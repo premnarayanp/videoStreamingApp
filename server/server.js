@@ -58,10 +58,15 @@ io.on('connection', (socket) => {
     //======================Group/Room  call sockets==============================
     //Join room By host
     socket.on('room:join', (data) => {
-        //console.log(data);
+        console.log(data);
         const { room, email } = data;
         io.to(room.id).emit("user:joined", { email, id: socket.id });
         socket.join(room.id);
+
+        // const { roomId, email } = data;
+        // io.to(roomId).emit("user:joined", { email, id: socket.id });
+        // socket.join(roomId);
+
         io.to(socket.id).emit("room:join", data);
     });
 

@@ -25,7 +25,7 @@ const RoomForm = (props) => {
     const handleJoinRoom = useCallback((e) => {
         e.preventDefault();
         socket.emit("room:join", { room: { roomId: roomId }, email });
-        // navigate("/room");
+        // socket.emit("room:join", { roomId , email });
     }, [email, roomId, socket]);
 
 
