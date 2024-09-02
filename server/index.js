@@ -1,9 +1,10 @@
 import dotenv from "dotenv";
 import express from "express";
 import cors from 'cors';
+import passportJWT from './src/config/passport-jwt-strategy.js';
 
 import userRoutes from './src/features/user/user.routes.js';
-// import Room from './src/features/room/room.schema.js'; // Uncomment if needed
+import roomRoutes from './src/features/room/room.routes.js';
 
 dotenv.config();
 
@@ -15,5 +16,5 @@ app.use(express.json());
 
 // Routes
 app.use('/api/users', userRoutes);
-
+app.use('/api/rooms', roomRoutes);
 export default app;

@@ -1,34 +1,26 @@
-import { ADD_FRIENDS_LIST, ADD_CURRENT_FRIEND, ADD_FRIEND_STATUS } from "../action/actionType"
+import { ADD_ROOM_LIST, ADD_ROOM_TO_LIST } from "../action/actionType"
 
 
 const initialRoomState = {
-    friendsList: [],
-    currentFriend: {},
-    friendStatus: "Offline"
+    roomList: [],
+    currentRoom: null
 }
 
 export default function rooms(state = initialRoomState, action) {
 
     switch (action.type) {
-        case ADD_FRIENDS_LIST:
+        case ADD_ROOM_LIST:
             return {
                 ...state,
-                friendsList: action.data
+                roomList: action.data
             }
 
 
-        case ADD_CURRENT_FRIEND:
+        case ADD_ROOM_TO_LIST:
             return {
                 ...state,
-                currentFriend: action.data
+                roomList: [...state.roomList, action.data]
             }
-
-        case ADD_FRIEND_STATUS:
-            return {
-                ...state,
-                friendStatus: action.data,
-            }
-
 
 
         default:

@@ -11,3 +11,7 @@ export const ADD_FRIEND_STATUS = 'ADD_FRIEND_STATUS';
 
 //Socket Action
 export const ADD_STREAM_SOCKET = 'ADD_STREAM_SOCKET';
+
+//Room Action
+export const ADD_ROOM_LIST = "ADD_ROOM_LIST";
+export const ADD_ROOM_TO_LIST = "ADD_ROOM_TO_LIST";

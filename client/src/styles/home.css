@@ -1,10 +1,14 @@
 .Home {
-    padding: 2px;
-    box-sizing: border-box;
     overflow: hidden;
     height: 92%;
     width: 100%;
-    padding: 20px 3%;
+    /* padding: 10px 3%; */
     box-sizing: border-box;
     background-color: aliceblue;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }

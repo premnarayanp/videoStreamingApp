@@ -24,7 +24,7 @@ function App(props) {
       <Navbar />
       <Routes>
         <Route path="/" element={<PrivateRoute> <Home user={auth.user} /> </PrivateRoute>} />
-        <Route path="/room" element={<PrivateRoute> <RoomPage user={auth.user} /> </PrivateRoute>} />
+        <Route path="/room/:roomId" element={<PrivateRoute> <RoomPage user={auth.user} /> </PrivateRoute>} />
         <Route exact path="/users/login" element={<Login />} />
         <Route exact path="/users/signup" element={<Signup />} />
         <Route path="*" element={<Page404 />} />

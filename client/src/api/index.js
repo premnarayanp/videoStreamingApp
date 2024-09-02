@@ -76,6 +76,19 @@ export const getFriendStatus = async (id) => {
 };
 
 
+export const createRoom = async (roomId, email, user, participants = [], isPrivate = false, isAllowDirectJoin = true) => {
+  return customFetch(API_URLS.createRoom(), {
+    method: 'POST',
+    body: { roomId, email, user, participants, isPrivate, isAllowDirectJoin },
+  });
+};
+
+export const getMyRooms = async () => {
+  return customFetch(API_URLS.getMyRooms(), {
+    method: 'GET',
+  });
+};
+
 
 // export const getAllMessage = async (from,to) => {
 //   return customFetch(API_URLS.getAllMessage(), {

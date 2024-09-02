@@ -3,6 +3,7 @@ import '../styles/friendBox.css'
 import { Friend } from "./index";
 import { useCallback, useEffect, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
+import "../styles/friendBox.css";
 
 const FriendBox = (props) => {
   const incomingCallRef = useRef([]);
@@ -48,7 +49,7 @@ const FriendBox = (props) => {
   }, [socket, handleAcceptCall]);
 
   return (
-    <div className="Home">
+    <div className='RoomBox'>
       {friendsList.map((friend, index) => (
         <Friend
           friend={friend}

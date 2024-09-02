@@ -1,7 +1,7 @@
 import '../styles/home.css';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { FriendBox } from "../components/index";
+import { FriendBox, RoomBox } from "../components/index";
 
 import { getAllFriends } from '../api/index';
 import { addFriendList } from '../redux/action/friendsActions';
@@ -41,6 +41,7 @@ export default function Home(props) {
   return (
     <div className="Home">
       <FriendBox />
+      <RoomBox />
     </div>
   )
 }

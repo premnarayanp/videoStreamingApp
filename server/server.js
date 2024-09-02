@@ -29,24 +29,46 @@ const socketIdToEmailMap = new Map();
 io.on('connection', (socket) => {
     //console.log('New user connected: ', socket.id);
 
+
+    //======================Single one to one call sockets===========================================
+    //if any user open the website/URL then add-user request come here over socket.
     socket.on("add-user", (user) => {
         emailToSocketIdMap.set(user.email, socket.id);
         socketIdToEmailMap.set(socket.id, user.email);
+        console.log('add-user: ', user);
     });
 
+    // any user doing single call  req for any particular single friend over socket
     socket.on('call:join', (data) => {
         console.log(data);
-        const { to, from, room } = data;
-        // emailToSocketIdMap.set(from.email, socket.id);
-        // socketIdToEmailMap.set(socket.id, from.email);
+        const { to, from } = data;
         const friendSocketId = emailToSocketIdMap.get(to.email);
+        //send  join call for that friend
         io.to(friendSocketId).emit("call:join", data);
     });
 
+    //Any friend accept call
     socket.on("call:accepted", (data) => {
-        const { to, from, room } = data;
+        const { to, from } = data;
         const friendSocketId = emailToSocketIdMap.get(to.email);
         io.to(friendSocketId).emit("call:accepted", data);
+    });
+
+
+    //======================Group/Room  call sockets==============================
+    //Join room By host
+    socket.on('room:join', (data) => {
+        console.log(data);
+        const { room, email } = data;
+        io.to(room.id).emit("user:joined", data);
+        socket.join(room.id);
+        io.to(socket.id).emit("room:join", data);
+    });
+
+    socket.on('user:join', (data) => {
+        console.log(data);
+        const { room, email } = data;
+        io.to(socket.id).emit("room:join", data);
     });
 
 

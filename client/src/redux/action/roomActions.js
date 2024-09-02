@@ -1,23 +1,16 @@
-import { ADD_FRIENDS_LIST, ADD_CURRENT_FRIEND, ADD_FRIEND_STATUS } from './actionType';
+import { ADD_ROOM_LIST, ADD_ROOM_TO_LIST } from './actionType';
 
 //action creator for Letter
-export function addFriendList(data) {
+export function addRoomList(data) {
     return {
-        type: ADD_FRIENDS_LIST,
+        type: ADD_ROOM_LIST,
         data: data
     }
 }
 
-export function addCurrentFriend(data) {
+export function addRoomToList(data) {
     return {
-        type: ADD_CURRENT_FRIEND,
-        data: data
-    }
-}
-
-export function addFriendStatus(data) {
-    return {
-        type: ADD_FRIEND_STATUS,
+        type: ADD_ROOM_TO_LIST,
         data: data
     }
 }
